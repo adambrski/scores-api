@@ -1,0 +1,22 @@
+version: '3.0' # specify docker-compose version
+
+# Define the services/ containers to be run
+services:
+ node:
+  build: .
+  ports:
+   - "5000:3000"
+  restart: always
+  depends_on:
+   - db
+
+ db:
+  image: mongo:4.0-xenial # specify image to build container from
+  volumes:
+   - db-data:/data/db
+  ports:
+   - "27017:27017" # specify port forwarding
+  restart: always
+
+volumes:
+  db-data:
